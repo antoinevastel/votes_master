@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <h1>Vote démos</h1>
+        <h2 class="alert alert-warning">Si vous avez déjà voté, seul votre dernier vote sera pris en compte</h2>
+
+        <div class="col-md-10 col-md-pull-2">
+            <h1>Démos</h1>
+            <ul>
+                {%for demo in demos %}
+                    <li>Démo numéro {{demo["numero"]}} : {{demo["titre"]}}
+                        <p>
+                            {{demo["description"]}}<br/>
+                            <a class="demo" id="demo{{demo["numero"]}}" href="/vote_demo/{{demo["numero"]}}">Voter pour cette démo <span class="glyphicon glyphicon-ok"></span></a>
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <script src="/static/js/sdzecvxcv.js"></script>
+    <script src="/static/js/vote_demo.js"></script>
+{% endblock %}

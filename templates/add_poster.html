@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-5">
+            {% if poster_added %}
+                <h1 class="alert alert-success">Le poster a été ajouté avec succès</h1>
+            {% endif %}
+
+            {% if poster_deleted %}
+                <h1 class="alert alert-success">Le poster a été supprimé avec succès</h1>
+            {% endif %}
+
+            {% if error %}
+                <div class="alert alert-danger">
+                    <h1>Le poster n'a pas pu être ajouté</h1>
+                    <p>
+                        Vérifiez que le numéro de poster n'est pas déjà utilisé.
+                    </p>
+                </div>
+            {% endif %}
+
+            <h1>Ajouter un poster</h1>
+            <form class="form-horizontal" action="add_poster" method="POST">
+              <div class="form-group">
+                <label for="poster-title" class="col-sm-2 control-label">Titre</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="poster-title" placeholder="Titre du poster" name="titre_poster">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="id-poster" class="col-sm-2 control-label">Numéro</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" id="id-poster" name="id_poster">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="description-poster" class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-10">
+                  <textarea id="description-poster" class="form-control" rows="3" name="description_poster"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Ajouter</button>
+                </div>
+              </div>
+            </form>
+        </div>
+
+        <div class="col-md-6 col-md-offset-1">
+            <h1>Posters ajoutés</h1>
+            <ul>
+                {%for poster in posters %}
+                    <li>{{poster["numero"]}} : {{poster["titre"]}} <a href="/delete_poster/{{poster["numero"]}}"><span class="glyphicon glyphicon-remove"></span></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
